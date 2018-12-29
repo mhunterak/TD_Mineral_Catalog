@@ -1,0 +1,27 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+    <head>
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
+        <head>
+        <meta charset="utf-8">
+        <title>Maxwell's Minerals: A magnificant catalog of minerals</title>
+        <meta name="description" content="">
+        <meta name="author" content="Maxwell Hunter">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
+        </head>
+        <link rel="stylesheet" href="/static/css/global.css">
+    </head>
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>
