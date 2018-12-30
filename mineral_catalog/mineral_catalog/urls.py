@@ -21,7 +21,9 @@ from minerals import views
 
 urlpatterns = [
     path('load/', views.load_new_minerals),
-    path('', views.home),
+    path('', views.index),
+    path('random/', views.random_mineral),
+    path('<int:pk>_detail/', views.mineral_detail),
     path('minerals/', views.mineral_list),
     path('admin/', admin.site.urls),
 ]
