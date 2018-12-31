@@ -1,67 +1,37 @@
-import json
-import os
 import random
-import re
 
-from django.core.files import File
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from minerals.models import Mineral
-from mineral_catalog.settings import STATICFILES_DIRS
 
 
 # Create your views here.
-
-
 def mineral_list(request):
+    '''This function is the view for showing the complete mineral list'''
     minerals = Mineral.objects.all()
+    # if no minerals are present in the database, load them from json
+    if minerals.count() == 0:
+        Mineral.load_from_json()
     return render(
         request,
-        'minerals/minerals_list.html',
+        'index.html',
         {'minerals': minerals, },
     )
 
 
 def mineral_detail(request, pk):
+    '''This function is the view for showing a specific mineral detail view'''
     mineral = Mineral.objects.get(pk=pk)
     return render(
         request,
         'detail.html',
-        {
-            'mineral': mineral,
-            'kv_list': mineral.kv_list(),
-            'keys': mineral.keys(),
-            'values': mineral.values(),
-        }
+        {'mineral': mineral, 'kv_list': mineral.kv_list(), }
     )
 
+
 def random_mineral(request):
-    random_id = random.randint(0, Mineral.objects.count())
+    '''This function is the view for selecting a random mineral'''
+    # generate random number between 1 and the number of minerals we have
+    random_id = random.randint(1, Mineral.objects.count())
+    # return a redirect the detail page for that mineral
     return redirect('/{}_detail/'.format(random_id))
-
-def load_new_minerals(request):
-    with open('./assets/minerals.json', 'r') as f:
-        json_string = ''
-        for line in f:
-            json_string += str(line)
-        json_list = json.loads(json_string)
-        for dict in json_list:
-            mineral = Mineral(
-                name=dict['name']
-            )
-            mineral.__dict__.update(dict)
-            for key in dict.keys():
-                if " " in key:
-                    underscore_key = "_".join(key.split(" "))
-                    setattr(mineral, underscore_key, dict[key])
-            mineral.save()
-        return HttpResponse(Mineral.objects.all())
-
-
-def index(request):
-    minerals = Mineral.objects.all()
-    return render(
-        request,
-        'index.html',
-        {'minerals': minerals})

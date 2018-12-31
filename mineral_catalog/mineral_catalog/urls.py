@@ -20,11 +20,13 @@ from django.urls import path
 from minerals import views
 
 urlpatterns = [
-    path('load/', views.load_new_minerals),
-    path('', views.index),
-    path('random/', views.random_mineral),
+    # index
+    path('', views.mineral_list),
+    # show mineral details
     path('<int:pk>_detail/', views.mineral_detail),
-    path('minerals/', views.mineral_list),
+    # XC: Show random element
+    path('random/', views.random_mineral),
+    # Django admin
     path('admin/', admin.site.urls),
 ]
 
