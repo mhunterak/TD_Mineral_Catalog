@@ -2,6 +2,7 @@ from django.db import models
 
 import json
 
+
 # Create your models here.
 class Mineral(models.Model):
     '''This class is the Model for storing mineral data
@@ -11,7 +12,6 @@ data comes from the provided json file'''
         max_length=255,
         unique=True,
         )
-    name = models.CharField(max_length=255)
     image_filename = models.CharField(max_length=255)
     image_caption = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
@@ -31,9 +31,9 @@ data comes from the provided json file'''
     crystal_habit = models.CharField(max_length=255)
     specific_gravity = models.CharField(max_length=255)
 
-    # TODO this should be done automatically, it doesn't need to be a view. class method maybe?
     def load_from_json():
-        '''This function is for loading minerals from the json document'''
+        '''This function is for loading minerals
+from the provided json document'''
         with open('./assets/minerals.json', 'r') as f:
             json_string = ''
             for line in f:
@@ -49,7 +49,6 @@ data comes from the provided json file'''
                         underscore_key = "_".join(key.split(" "))
                         setattr(mineral, underscore_key, dict[key])
                 mineral.save()
-
 
     def key_w_spaces(key):
         '''This static method converts the python attribute
@@ -70,7 +69,6 @@ this needs to be done in detail.html, not here
                 pass
         return "".join(display_list)+':'
 
-
     def kv_list(self):
         '''This class method returns the stored values as a list of
 key value pairs [[key,value],[key,value]]
@@ -84,7 +82,7 @@ into a template-friendly, ordered, and iterable format was a list of lists'''
         second_list = []
         # iterate over the dictionary
         for key in self.__dict__.keys():
-            # some values shouldn't be displayed at all. 
+            # some values shouldn't be displayed at all.
             # If it's not on the ignore list:
             if key not in [
                     '_state', 'created_at', 'id', 'image_filename',
@@ -94,7 +92,6 @@ into a template-friendly, ordered, and iterable format was a list of lists'''
                     display_key = Mineral.key_w_spaces(key)
                     # save the child list
                     sub_list = [display_key, self.__dict__[key]]
-                    print(type(self.__dict__[key]))
                     '''XC Requirement: Display the most common or important
                     details at the top of the details list.
                     You can decide on what order to display them in.
