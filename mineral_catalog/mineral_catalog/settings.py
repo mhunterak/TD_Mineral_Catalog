@@ -26,7 +26,8 @@ SECRET_KEY = '9f2)4!mdmz3qbwa1*yqys-a--#bkx@bqca-iv7t*5oeep2_lju'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '0.0.0.0'
+    '0.0.0.0',
+    '127.0.0.1'
 ]
 
 
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'mineral_catalog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates',],
+        'DIRS': ['templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
