@@ -64,10 +64,9 @@ this needs to be done in detail.html, not here
             try:
                 if char == '_':
                     display_list[i] = ' '
-                    display_list[i+1] = display_list[i+1].upper()
             except IndexError:
                 pass
-        return "".join(display_list)+':'
+        return "".join(display_list)
 
     def kv_list(self):
         '''This class method returns the stored values as a list of
