@@ -21,11 +21,11 @@ from minerals import views
 
 urlpatterns = [
     # index
-    path('', views.mineral_list),
+    path('', views.mineral_list, name='index'),
     # show mineral details
-    path('<int:pk>_detail/', views.mineral_detail),
+    path('detail/<int:pk>', views.mineral_detail, name='detail'),
     # XC: Show random element
-    path('random/', views.random_mineral),
+    path('random/', views.random_mineral, name='random'),
     # Django admin
     path('admin/', admin.site.urls),
 ]

@@ -22,10 +22,17 @@
         <link rel="stylesheet" href="/static/css/global.css">
     </head>
     <body>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
         {% block content %}
         {% endblock content %}
         <div class="minerals__random">
-                <a class="minerals__anchor" href="/random/">Show random mineral</a>
+                <a class="minerals__anchor" href="{% url 'random' %}">Show random mineral</a>
         </div>
     </body>
 </html>

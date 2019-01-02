@@ -2,6 +2,7 @@ from datetime import datetime as dt
 
 from django.test import TestCase
 from django.test import Client
+from django.urls import reverse
 
 from .models import Mineral
 
@@ -41,11 +42,11 @@ class Test_Views(TestCase):
 
     def test_E_mineralDetail(self, client=client):
         Mineral.load_from_json()
-        r = client.get('/146_detail/')
+        r = client.get('/detail/146')
         self.assertIn(b"This mineral rocks!", r.content)
         self.assertIn(b"Bunsenite", r.content)
 
     def test_E_randomMineral(self, client=client):
         Mineral.load_from_json()
         r = client.get('/random/')
-        self.assertTrue(r.__dict__['_headers']['location'])
+        self.assertEqual(r.status_code, 302)

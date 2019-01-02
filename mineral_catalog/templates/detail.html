@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% load under_space %}
 {% block title%}Maxwell's Minerals{% endblock title%}
 {% block content %}
   <div class="bounds bounds--small">
@@ -23,7 +24,7 @@
         <table class="mineral__table">
           {% for kv in kv_list %}
           <tr>
-            <td>{{ kv.0 }}</td>
+            <td class="mineral__title">{{ kv.0 | title | under_space }}</td>
             <td class="mineral__category">{{ kv.1 | safe }}</td>
           </tr>
           {% endfor %}
