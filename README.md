@@ -1,6 +1,8 @@
 # TD_Mineral_Catalog
 -Python Web Development Treehouse TechDegree: Project 6
 
+# I am aiming for the 'exceeds expectations' grade!
+
 >by https://github.com/mhunterak
 
 { Assuming you have Python 3.x installed }
