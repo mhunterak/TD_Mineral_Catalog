@@ -59,7 +59,7 @@ ROOT_URLCONF = 'mineral_catalog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', ],
+        'DIRS': ['templates', './mineral_catalog/templates/' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -10,9 +10,6 @@ from minerals.models import Mineral
 def mineral_list(request):
     '''This function is the view for showing the complete mineral list'''
     minerals = Mineral.objects.all()
-    # if no minerals are present in the database, load them from json
-    if minerals.count() == 0:
-        Mineral.load_from_json()
     return render(
         request,
         'index.html',

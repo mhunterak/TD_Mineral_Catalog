@@ -2,6 +2,8 @@
 
 from django.db import migrations, models
 
+from ..models import Mineral
+
 
 class Migration(migrations.Migration):
 
