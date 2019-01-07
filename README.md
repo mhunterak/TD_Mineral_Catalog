@@ -16,6 +16,9 @@ activate vituralenv:
 install requirements:
 	> pip install -r requirements.txt
 
+run django database migration:
+	> python manage.py migrate
+
 launch django application:
 	> python manage.py runserver 0.0.0.0:8000
 
