@@ -31,10 +31,15 @@ data comes from the provided json file'''
     crystal_habit = models.CharField(max_length=255)
     specific_gravity = models.CharField(max_length=255)
 
-    def load_from_json():
-        '''This function is for loading minerals
-from the provided json document'''
-        with open('./assets/minerals.json', 'r') as f:
+    @staticmethod
+    def load_from_json(*args):
+        '''This function loads minerals into the database from the provided json document.
+I considered moving this function, but I thought it better to have it here than obscured
+in a strange file.
+
+This function is now called in .migrations/0001_initial.py
+'''
+        with open('./mineral_catalog/assets/minerals.json', 'r', encoding='utf-8') as f:
             json_string = ''
             for line in f:
                 json_string += str(line)
@@ -50,13 +55,10 @@ from the provided json document'''
                         setattr(mineral, underscore_key, dict[key])
                 mineral.save()
 
+    @staticmethod
     def key_w_spaces(key):
-        '''This static method converts the python attribute
-to Title Case and adds a :
-
-TODO Use a template filter to display the name of each
-attribute in title case -
-this needs to be done in detail.html, not here
+        '''This class method replaces an underscore (database version)
+with a space (display version)
 '''
         display_list = list(key)
         display_list[0] = display_list[0].upper()
@@ -88,7 +90,7 @@ into a template-friendly, ordered, and iterable format was a list of lists'''
                     'image_caption']:
                 # if there's a value is not blank,
                 if self.__dict__[key] is not '':
-                    display_key = Mineral.key_w_spaces(key)
+                    display_key = self.key_w_spaces(key)
                     # save the child list
                     sub_list = [display_key, self.__dict__[key]]
                     '''XC Requirement: Display the most common or important
@@ -105,4 +107,4 @@ into a template-friendly, ordered, and iterable format was a list of lists'''
         return kv_list + second_list
 
     def __str__(self):
-        return str(self.__dict__)
+        return str(self.kv_list())
