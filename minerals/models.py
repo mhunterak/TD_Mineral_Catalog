@@ -39,7 +39,7 @@ in a strange file.
 
 This function is now called in .migrations/0001_initial.py
 '''
-        with open('./mineral_catalog/assets/minerals.json', 'r', encoding='utf-8') as f:
+        with open('./assets/minerals.json', 'r', encoding='utf-8') as f:
             json_string = ''
             for line in f:
                 json_string += str(line)
