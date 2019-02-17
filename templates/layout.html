@@ -30,20 +30,20 @@
         </ul>
         {% endif %}
         <p class="text-centered">
-            Filter by first letter: <br/>
+            Filter by first letter: </br>
             {% for char in alphabet %}
-            {% if char == letter %}
-            <strong>
-                {% endif %}
-                <a href="{% url 'filter' pk=char %}" class="
                 {% if char == letter %}
-                filter_bold
-                {% else %}
-                filter_lite
+                <strong>
+                {% endif %}
+                <a href="{% url 'filter' pk=char %}" 
+                {% if char == letter %}
                 {% endif %}
                 ">
                 {{ char }}
-            </a> |
+                </a>
+                {% if char == letter %}
+                </strong>
+                {% endif %} |
             {% endfor %}
         </p>
 

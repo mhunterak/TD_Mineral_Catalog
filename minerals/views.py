@@ -8,8 +8,13 @@ from minerals.models import Mineral
 
 
 def mineral_list(request):
-    '''This function is the view for showing the complete mineral list'''
+    '''This function is the view for showing the complete mineral list
+    
+    for project 8, this view redirects to the letter filter for "A"
+    '''
     return redirect('filter', pk="A")
+    '''
+this is how I did it for project 6, could also be considered a view for 'all' minerals
     minerals = Mineral.objects.all()
 
     return render(
@@ -18,6 +23,7 @@ def mineral_list(request):
         {'minerals': minerals,
          'alphabet': string.ascii_uppercase },
     )
+    '''
 
 
 def filter_by_first_letter(request, pk):

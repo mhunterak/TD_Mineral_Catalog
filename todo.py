@@ -30,7 +30,7 @@ TODO: Optimize database queries
 TODO: Unit test the app.
     Write unit tests to test that each view is displaying the correct information. Write unit tests to test that the models, classes, and other functions behave as expected.
 
-TODO: Make the templates match the style used in the example files.
+Make the templates match the style used in the example files.
     Look at the example HTML files and global.css to determine the styles used in the pages.
 
 TODO EXTRA CREDIT
