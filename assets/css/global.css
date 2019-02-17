@@ -177,6 +177,9 @@ table, p, ul { margin-bottom: 2.5rem; }
 
 .text-centered { text-align: center; }
 
+.filter_lite { font-weight: lighter;}
+.filter_bold { font-weight: bolder;}
+
 .logo { display: block; fill: #384033; position: relative; margin: 0 auto; width: 72px; }
 .logo__name { font-size: 49px; margin-bottom: 0; }
 .logo__text { margin-bottom: 50px; font-size: 13px; }

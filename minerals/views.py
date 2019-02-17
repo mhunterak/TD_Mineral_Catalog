@@ -1,4 +1,5 @@
 import random
+import string
 
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -6,14 +7,30 @@ from django.shortcuts import render, redirect
 from minerals.models import Mineral
 
 
-# Create your views here.
 def mineral_list(request):
     '''This function is the view for showing the complete mineral list'''
+    return redirect('filter', pk="A")
     minerals = Mineral.objects.all()
+
     return render(
         request,
         'index.html',
-        {'minerals': minerals, },
+        {'minerals': minerals,
+         'alphabet': string.ascii_uppercase },
+    )
+
+
+def filter_by_first_letter(request, pk):
+    '''This function is the view for showing the complete mineral list'''
+    minerals = Mineral.objects.filter(name__startswith=pk)
+    return render(
+        request,
+        'index.html',
+        {
+         'alphabet': string.ascii_uppercase,
+         'letter': pk.upper(),
+         'minerals': minerals,
+         },
     )
 
 
@@ -30,7 +47,11 @@ def mineral_detail(request, pk):
     return render(
         request,
         'detail.html',
-        {'mineral': mineral, 'kv_list': mineral.kv_list(), }
+        {
+            'mineral': mineral, 
+            'kv_list': mineral.kv_list(), 
+            'alphabet': string.ascii_uppercase,
+        }
     )
 
 

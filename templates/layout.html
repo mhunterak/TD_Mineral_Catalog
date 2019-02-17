@@ -29,6 +29,24 @@
             {% endfor %}
         </ul>
         {% endif %}
+        <p class="text-centered">
+            Filter by first letter: <br/>
+            {% for char in alphabet %}
+            {% if char == letter %}
+            <strong>
+                {% endif %}
+                <a href="{% url 'filter' pk=char %}" class="
+                {% if char == letter %}
+                filter_bold
+                {% else %}
+                filter_lite
+                {% endif %}
+                ">
+                {{ char }}
+            </a> |
+            {% endfor %}
+        </p>
+
         {% block content %}
         {% endblock content %}
         <div class="minerals__random">

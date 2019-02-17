@@ -28,6 +28,8 @@ urlpatterns = [
     path('random/', views.random_mineral, name='random'),
     # Django admin
     path('admin/', admin.site.urls),
+    # filter by first letter
+    path('filter_letter/<str:pk>', views.filter_by_first_letter, name='filter')
 ]
 
 urlpatterns += staticfiles_urlpatterns()
