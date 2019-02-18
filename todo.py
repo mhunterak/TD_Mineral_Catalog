@@ -20,12 +20,14 @@ Allow text search
         - the list view. Add the search form to the layout template so that
         searching can be performed from any page in the site
 
-TODO: Allow filtering by group.
-    Add the ability to filter the list of minerals by adding links to these
-    groups on the left side of the layout template. Clicking a group name,
+Allow filtering by group.
+    - Add the ability to filter the list of minerals by adding links to these
+    groups on the left side of the layout template.
+    - Clicking a group name,
     displays a list of all of the minerals in the database that are in that
-    group. The group name being displayed should be bolded. In the details
-    view, no group name should be bolded.
+    group. 
+    - The group name being displayed should be bolded.
+    - In the details view, no group name should be bolded.
 
 Silicates
 Oxides

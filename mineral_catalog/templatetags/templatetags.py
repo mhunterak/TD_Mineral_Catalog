@@ -1,3 +1,4 @@
+import string
 from django import template
 
 register = template.Library()

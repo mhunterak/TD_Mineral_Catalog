@@ -24,6 +24,25 @@
 </head>
 
 <body>
+  <div class="container">
+    <div class="grid-20 fixed">
+            Mineral Groups:
+            <ul>
+                {% for group_listing in groups %}
+                <li>
+                    <a href="{% url 'group' pk=group_listing %}"
+                    {% if group == group_listing %}
+                    id='filtered_group'
+                    {% endif %}>
+    
+                        {{ group_listing }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    <div class="grid-80 scroll">
+
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -34,15 +53,18 @@
     <p class="text-centered">
         Filter by first letter: </br>
         {% for char in alphabet %}
-        {% if char == letter %}
-        <strong>
+            {% if char == letter %}
+            <strong>
             {% endif %}
-            <a href="{% url 'filter' pk=char %}" {% if char == letter %} {% endif %} ">
+            <a href="{% url 'filter' pk=char %}"
+                {% if char == letter %}
+                id='filtered_letter'
+                {% endif %}>
                 {{ char }}
             </a>
             {% if char == letter %}
-        </strong>
-        {% endif %} |
+            </strong>
+            {% endif %}
         {% endfor %}
     </p>
     <form action="{% url 'search' %}" class="text-centered" method="post" name="q">
@@ -50,9 +72,26 @@
         {{ SearchForm.search }}<input type='submit'>
     </form>
 
-    {% block content %}
-    {% endblock content %}
+    {% block head %}
+    {% endblock head %}
+    {% if minerals is not None %}
+    <h2 class="text-centered">
+        {{ minerals.count }} minerals found
+        {% if pk %}
+        that have "{{ pk }}" in the name
+        {% endif %}
+        {% if letter %}
+        that start with the letter "{{ letter }}"
+        {% endif %}
+        {% if group %}
+        in the group "{{ group }}"
+        {% endif %}
+    </h2>
+    {% endif %}
+        {% block content %}
+        {% endblock content %}
 
+    </div>
     <div class="minerals__random">
         <a class="minerals__anchor" href="{% url 'random' %}">Show random mineral</a>
     </div>

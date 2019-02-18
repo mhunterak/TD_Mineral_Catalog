@@ -59,7 +59,7 @@ ROOT_URLCONF = 'mineral_catalog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', './mineral_catalog/templates/' ],
+        'DIRS': ['templates', './mineral_catalog/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,6 +67,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'minerals.context_processors.search_form',
+                'minerals.context_processors.alphabet',
+                'minerals.context_processors.groups',
             ],
         },
     },
@@ -126,3 +129,22 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets/'),
 )
+
+if DEBUG:
+	INSTALLED_APPS += ( 'debug_toolbar',)
+	MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+	DEBUG_TOOLBAR_PANELS = [
+	    'debug_toolbar.panels.versions.VersionsPanel',
+	    'debug_toolbar.panels.timer.TimerPanel',
+	    'debug_toolbar.panels.settings.SettingsPanel',
+	    'debug_toolbar.panels.headers.HeadersPanel',
+	    'debug_toolbar.panels.request.RequestPanel',
+	    'debug_toolbar.panels.sql.SQLPanel',
+	    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+	    'debug_toolbar.panels.templates.TemplatesPanel',
+	    'debug_toolbar.panels.cache.CachePanel',
+	    'debug_toolbar.panels.signals.SignalsPanel',
+	    'debug_toolbar.panels.logging.LoggingPanel',
+	    'debug_toolbar.panels.redirects.RedirectsPanel',
+	]
+	SHOW_TOOLBAR_CALLBACK = True

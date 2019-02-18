@@ -14,37 +14,54 @@ def mineral_list(request):
     for project 8, this view redirects to the letter filter for "A"
     '''
     return redirect('filter', pk="A")
-    '''
-this is how I did it for project 6
-could also be considered a view for 'all' minerals
-    minerals = Mineral.objects.all()
 
+
+def all_minerals(request):
+    '''This function is the view for showing the complete mineral list'''
+    minerals = Mineral.objects.all()
     return render(
         request,
-        'index.html',
-        {'minerals': minerals,
-         'alphabet': string.ascii_uppercase },
+        'list.html',
+        {
+            'minerals': minerals,
+        },
     )
-    '''
 
 
 def filter_by_first_letter(request, pk):
-    '''This function is the view for showing the complete mineral list'''
+    '''
+This function is the view for showing a filtered mineral list by 
+the first letter of the name
+    '''
     minerals = Mineral.objects.filter(name__startswith=pk)
     return render(
         request,
-        'index.html',
+        'list.html',
         {
-         'minerals': minerals,
-         'letter': pk.upper(),
-         'alphabet': string.ascii_uppercase,
-         'SearchForm': SearchForm,
-         },
+            'minerals': minerals,
+            'letter': pk.upper(),
+        },
+    )
+
+
+def filter_by_group(request, pk):
+    '''
+This function is the view for showing a filtered mineral list by
+the Mineral's group attribute
+    '''
+    minerals = Mineral.objects.filter(group=pk)
+    return render(
+        request,
+        'list.html',
+        {
+            'minerals': minerals,
+            'group': pk,
+        },
     )
 
 
 def mineral_detail(request, pk):
-    '''This function is the view for showing a specific mineral detail view'''
+    '''This function is the view for showing a specific mineral in detail'''
     try:
         mineral = Mineral.objects.get(pk=pk)
     except Mineral.DoesNotExist:
@@ -59,8 +76,6 @@ def mineral_detail(request, pk):
         {
             'mineral': mineral,
             'kv_list': mineral.kv_list(),
-            'alphabet': string.ascii_uppercase,
-            'SearchForm': SearchForm,
         }
     )
 
@@ -87,11 +102,9 @@ def mineral_name_search(request):
     minerals = Mineral.objects.filter(name__contains=pk)
     return render(
         request,
-        'index.html',
+        'list.html',
         {
-         'minerals': minerals,
-         'pk': pk,
-         'alphabet': string.ascii_uppercase,
-         'SearchForm': SearchForm,
-         },
+            'minerals': minerals,
+            'pk': pk,
+        },
     )

@@ -30,6 +30,7 @@ data comes from the provided json file'''
     refractive_index = models.CharField(max_length=255)
     crystal_habit = models.CharField(max_length=255)
     specific_gravity = models.CharField(max_length=255)
+    group = models.CharField(default="", max_length=255)
 
     @staticmethod
     def load_from_json(*args):

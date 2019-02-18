@@ -15,13 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.urls import path
+from django.urls import path, include
 
 from minerals import views
+from .settings import DEBUG
 
 urlpatterns = [
     # index
     path('', views.mineral_list, name='index'),
+    # show all minerals
+    path('all/', views.all_minerals, name='all'),
     # show mineral details
     path('detail/<int:pk>', views.mineral_detail, name='detail'),
     # XC: Show random element
@@ -33,6 +36,14 @@ urlpatterns = [
          views.filter_by_first_letter, name='filter'),
     # search by name contains
     path('search/', views.mineral_name_search, name='search'),
+    # search by group
+    path('group/<str:pk>', views.filter_by_group, name='group'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
+
+if DEBUG:
+	import debug_toolbar
+	urlpatterns += [
+		path(r'^__debug__/', include(debug_toolbar.urls)),
+        ]
