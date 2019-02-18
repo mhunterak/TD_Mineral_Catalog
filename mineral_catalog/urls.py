@@ -29,7 +29,10 @@ urlpatterns = [
     # Django admin
     path('admin/', admin.site.urls),
     # filter by first letter
-    path('filter_letter/<str:pk>', views.filter_by_first_letter, name='filter')
+    path('filter_letter/<str:pk>',
+         views.filter_by_first_letter, name='filter'),
+    # search by name contains
+    path('search/', views.mineral_name_search, name='search'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

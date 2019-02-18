@@ -5,16 +5,18 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 
 from minerals.models import Mineral
+from minerals.forms import SearchForm
 
 
 def mineral_list(request):
     '''This function is the view for showing the complete mineral list
-    
+
     for project 8, this view redirects to the letter filter for "A"
     '''
     return redirect('filter', pk="A")
     '''
-this is how I did it for project 6, could also be considered a view for 'all' minerals
+this is how I did it for project 6
+could also be considered a view for 'all' minerals
     minerals = Mineral.objects.all()
 
     return render(
@@ -33,9 +35,10 @@ def filter_by_first_letter(request, pk):
         request,
         'index.html',
         {
-         'alphabet': string.ascii_uppercase,
-         'letter': pk.upper(),
          'minerals': minerals,
+         'letter': pk.upper(),
+         'alphabet': string.ascii_uppercase,
+         'SearchForm': SearchForm,
          },
     )
 
@@ -54,9 +57,10 @@ def mineral_detail(request, pk):
         request,
         'detail.html',
         {
-            'mineral': mineral, 
-            'kv_list': mineral.kv_list(), 
+            'mineral': mineral,
+            'kv_list': mineral.kv_list(),
             'alphabet': string.ascii_uppercase,
+            'SearchForm': SearchForm,
         }
     )
 
@@ -73,3 +77,21 @@ def random_mineral(request):
 
     # return a redirect the detail page for that mineral
     return redirect('/detail/{}'.format(random_id))
+
+
+def mineral_name_search(request):
+    if request.POST:
+        pk = request.POST['search']
+    else:
+        pk = ""
+    minerals = Mineral.objects.filter(name__contains=pk)
+    return render(
+        request,
+        'index.html',
+        {
+         'minerals': minerals,
+         'pk': pk,
+         'alphabet': string.ascii_uppercase,
+         'SearchForm': SearchForm,
+         },
+    )

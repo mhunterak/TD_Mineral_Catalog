@@ -1,15 +1,16 @@
 {% load static from staticfiles %}
-
 <!DOCTYPE html>
 <html lang="en">
 
 <html>
+
+<head>
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+
     <head>
-        <title>
-            {% block title %}
-            {% endblock title %}
-        </title>
-        <head>
         <meta charset="utf-8">
         <title>Maxwell's Minerals: A magnificant catalog of minerals</title>
         <meta name="description" content="">
@@ -18,39 +19,43 @@
         <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet" type='text/css'>
-        </head>
-        <link rel="stylesheet" href="/static/css/global.css">
     </head>
-    <body>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        <p class="text-centered">
-            Filter by first letter: </br>
-            {% for char in alphabet %}
-                {% if char == letter %}
-                <strong>
-                {% endif %}
-                <a href="{% url 'filter' pk=char %}" 
-                {% if char == letter %}
-                {% endif %}
-                ">
-                {{ char }}
-                </a>
-                {% if char == letter %}
-                </strong>
-                {% endif %} |
-            {% endfor %}
-        </p>
+    <link rel="stylesheet" href="/static/css/global.css">
+</head>
 
-        {% block content %}
-        {% endblock content %}
-        <div class="minerals__random">
-                <a class="minerals__anchor" href="{% url 'random' %}">Show random mineral</a>
-        </div>
-    </body>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <p class="text-centered">
+        Filter by first letter: </br>
+        {% for char in alphabet %}
+        {% if char == letter %}
+        <strong>
+            {% endif %}
+            <a href="{% url 'filter' pk=char %}" {% if char == letter %} {% endif %} ">
+                {{ char }}
+            </a>
+            {% if char == letter %}
+        </strong>
+        {% endif %} |
+        {% endfor %}
+    </p>
+    <form action="{% url 'search' %}" class="text-centered" method="post" name="q">
+        {% csrf_token %}
+        {{ SearchForm.search }}<input type='submit'>
+    </form>
+
+    {% block content %}
+    {% endblock content %}
+
+    <div class="minerals__random">
+        <a class="minerals__anchor" href="{% url 'random' %}">Show random mineral</a>
+    </div>
+</body>
+
 </html>

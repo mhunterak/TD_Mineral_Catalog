@@ -2,13 +2,30 @@
 MASTER TODO LIST 
 
 Allow filtering by the first letter of the mineral name.
-    Add links for each letter of the alphabet. This should be added to the layout template so that it appears on every page. When a letter is clicked, a list of minerals that start with that letter should be displayed in the list view. The letter of the alphabet currently being displayed should be bolded. In the details view, no letter should be bolded. On the homepage, select ‘A’ by default.
+    - Add links for each letter of the alphabet.
+    - This should be added to the layout template
+        so that it appears on every page.
+    - When a letter is clicked, a list of minerals that start with that letter
+        should be displayed in the list view.
+    - The letter of the alphabet currently being displayed should be bolded.
+    - In the details view, no letter should be bolded.
+    - On the homepage, select ‘A’ by default.
 
-TODO: Allow text search.
-    Add a search box and button. The search box and button should be implemented as a form. When the search button is clicked, the site will search for minerals whose name contains the search text. The names of the minerals that match the search will be displayed in the list view. Add the search form to the layout template so that searching can be performed from any page in the site.
+Allow text search
+    - Add a search box and button
+    - The search box and button should be implemented as a form
+    - When the search button is clicked,
+        - the site will search for minerals whose name contains the search text
+        - The names of the minerals that match the search will be displayed in
+        - the list view. Add the search form to the layout template so that
+        searching can be performed from any page in the site
 
 TODO: Allow filtering by group.
-    Add the ability to filter the list of minerals by adding links to these groups on the left side of the layout template. Clicking a group name, displays a list of all of the minerals in the database that are in that group. The group name being displayed should be bolded. In the details view, no group name should be bolded.
+    Add the ability to filter the list of minerals by adding links to these
+    groups on the left side of the layout template. Clicking a group name,
+    displays a list of all of the minerals in the database that are in that
+    group. The group name being displayed should be bolded. In the details
+    view, no group name should be bolded.
 
 Silicates
 Oxides
