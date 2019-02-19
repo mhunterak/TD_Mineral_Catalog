@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.urls import path, include
+from django.urls import path
+from django.conf import settings
+from django.conf.urls import include, url
 
 from minerals import views
-from .settings import DEBUG
 
 urlpatterns = [
     # index
@@ -27,7 +28,7 @@ urlpatterns = [
     path('all/', views.all_minerals, name='all'),
     # show mineral details
     path('detail/<int:pk>', views.mineral_detail, name='detail'),
-    # XC: Show random element
+    # Show random element
     path('random/', views.random_mineral, name='random'),
     # Django admin
     path('admin/', admin.site.urls),
@@ -35,15 +36,19 @@ urlpatterns = [
     path('filter_letter/<str:pk>',
          views.filter_by_first_letter, name='filter'),
     # search by name contains
-    path('search/', views.mineral_name_search, name='search'),
-    # search by group
+    # path('search/', views.mineral_name_search, name='search'),
+    # filter by group
     path('group/<str:pk>', views.filter_by_group, name='group'),
+    # filter by color
+    path('color/<str:pk>', views.filter_by_color, name='color'),
+    # search by any field contains
+    path('search-all/', views.mineral_all_search, name='search-all'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
 
-if DEBUG:
-	import debug_toolbar
-	urlpatterns += [
-		path(r'^__debug__/', include(debug_toolbar.urls)),
-        ]
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+       url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

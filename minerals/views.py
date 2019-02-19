@@ -2,10 +2,10 @@ import random
 import string
 
 from django.contrib import messages
+from django.db.models import CharField, Q
 from django.shortcuts import render, redirect
 
 from minerals.models import Mineral
-from minerals.forms import SearchForm
 
 
 def mineral_list(request):
@@ -33,12 +33,11 @@ def filter_by_first_letter(request, pk):
 This function is the view for showing a filtered mineral list by 
 the first letter of the name
     '''
-    minerals = Mineral.objects.filter(name__startswith=pk)
     return render(
         request,
         'list.html',
         {
-            'minerals': minerals,
+            'minerals': Mineral.objects.filter(name__startswith=pk),
             'letter': pk.upper(),
         },
     )
@@ -93,7 +92,8 @@ def random_mineral(request):
     # return a redirect the detail page for that mineral
     return redirect('/detail/{}'.format(random_id))
 
-
+''' DEPRECATED
+switched this to search all values,
 def mineral_name_search(request):
     if request.POST:
         pk = request.POST['search']
@@ -106,5 +106,45 @@ def mineral_name_search(request):
         {
             'minerals': minerals,
             'pk': pk,
+        },
+    )
+'''
+
+
+def mineral_all_search(request):
+    '''
+from https://stackoverflow.com/questions/1866847/searching-all-fields-in-a-table-in-django
+    '''
+    if request.POST:
+        pk = request.POST['search']
+    else:
+        return redirect('all')
+
+    or_query = None  # Query to search for a given term in each field
+    for field_name in Mineral.iter():
+        q = Q(**{"%s__contains" % field_name: pk})
+        if or_query is None:
+            or_query = q
+        else:
+            or_query = or_query | q
+    minerals = Mineral.objects.filter(or_query)
+    return render(
+        request,
+        'list.html',
+        {
+            'minerals': minerals,
+            'pk': pk,
+        },
+    )
+
+
+def filter_by_color(request, pk):
+    minerals = Mineral.objects.filter(color__contains=pk)
+    return render(
+        request,
+        'list.html',
+        {
+            'minerals': minerals,
+            'color': pk,
         },
     )

@@ -1,6 +1,7 @@
-from django.db import models
-
 import json
+import re
+
+from django.db import models
 
 
 # Create your models here.
@@ -10,7 +11,6 @@ data comes from the provided json file'''
     created_at = models.DateTimeField(auto_now_add=True)
     name = models.CharField(
         max_length=255,
-        unique=True,
         )
     image_filename = models.CharField(max_length=255)
     image_caption = models.CharField(max_length=255)
@@ -106,6 +106,19 @@ into a template-friendly, ordered, and iterable format was a list of lists'''
                         second_list.append(sub_list)
         # return the combined list
         return kv_list + second_list
+
+    def iter():
+        for key in Mineral.__dict__.keys():
+            if not re.match('__', key):
+                if key not in [
+                    '_state', 'created_at', 'id', 'image_filename', '_meta',
+                    'image_caption', 'DoesNotExist', 'MultipleObjectsReturned',
+                    'get_next_by_created_at', 'get_previous_by_created_at',
+                    'load_from_json', 'key_w_spaces', 'kv_list', 'iter',
+                    'objects',
+                    ]:
+                    yield key
+
 
     def __str__(self):
         return str(self.kv_list())

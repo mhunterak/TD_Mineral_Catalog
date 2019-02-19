@@ -43,21 +43,25 @@ Arsenates
 Native Elements
 Other
 
-TODO: Optimize database queries
-    Use the django-debug-toolbar to check that queries to the database take no longer than 10ms to complete.
+: Optimize database queries
+    Use the django-debug-toolbar to check that queries to the database
+    take no longer than 10ms to complete.
 
-TODO: Unit test the app.
-    Write unit tests to test that each view is displaying the correct information. Write unit tests to test that the models, classes, and other functions behave as expected.
+Unit test the app.
+    Write unit tests to test that each view is displaying the correct
+    information. Write unit tests to test that the models, classes,
+    and other functions behave as expected.
 
 Make the templates match the style used in the example files.
-    Look at the example HTML files and global.css to determine the styles used in the pages.
+    Look at the example HTML files and global.css to determine the styles
+    used in the pages.
 
-TODO EXTRA CREDIT
+EXTRA CREDIT
 
-TODO: Allow full-text search
+Allow full-text search.
     Instead of only searching the mineral names, the site will search all fields in the database and display the names of the minerals that contain the search text.
 
-TODO: Add more ways to filter.
+Add more ways to filter.
     Instead of just filtering by first letter and group, add one or more additional filters. These should behave like the group filter. Example filters are color and crystal habit, but you can choose to add filtering for any property you like. Hint: the filters can act like canned search queries.
 
 '''
