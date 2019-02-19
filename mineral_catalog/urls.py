@@ -27,7 +27,7 @@ urlpatterns = [
     # show all minerals
     path('all/', views.all_minerals, name='all'),
     # show mineral details
-    path('detail/<int:query>', views.mineral_detail, name='detail'),
+    path('detail/<int:pk>', views.mineral_detail, name='detail'),
     # Show random element
     path('random/', views.random_mineral, name='random'),
     # Django admin
