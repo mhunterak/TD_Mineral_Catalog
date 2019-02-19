@@ -1,3 +1,8 @@
+'''
+Context Processors do some pretty great work, like default arguments supplied
+to templates when they're rendered.
+'''
+
 import string
 import re
 
@@ -23,12 +28,17 @@ def groups(request):
     return {'groups': GROUPS, }
 
 
+# this queryset is loaded once on initialization
+all_minerals = Mineral.objects.all()
+
+
 def colors(request):
     color_list = []
-    for mineral in Mineral.objects.all():
-        if mineral.color not in color_list:
-            if mineral.color != '':
-                if not re.search('\W', mineral.color):
-                    color_list.append(mineral.color)
+    for mineral in all_minerals:
+        new_color = mineral.color.lower()
+        if new_color not in color_list:
+            if new_color != '':
+                if not re.search('\W', new_color):
+                    color_list.append(new_color)
     color_list.sort()
     return {'colors': color_list, }

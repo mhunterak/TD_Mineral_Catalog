@@ -27,20 +27,20 @@ urlpatterns = [
     # show all minerals
     path('all/', views.all_minerals, name='all'),
     # show mineral details
-    path('detail/<int:pk>', views.mineral_detail, name='detail'),
+    path('detail/<int:query>', views.mineral_detail, name='detail'),
     # Show random element
     path('random/', views.random_mineral, name='random'),
     # Django admin
     path('admin/', admin.site.urls),
     # filter by first letter
-    path('filter_letter/<str:pk>',
+    path('filter_letter/<str:query>',
          views.filter_by_first_letter, name='filter'),
     # search by name contains
     # path('search/', views.mineral_name_search, name='search'),
     # filter by group
-    path('group/<str:pk>', views.filter_by_group, name='group'),
+    path('group/<str:query>', views.filter_by_group, name='group'),
     # filter by color
-    path('color/<str:pk>', views.filter_by_color, name='color'),
+    path('color/<str:query>', views.filter_by_color, name='color'),
     # search by any field contains
     path('search-all/', views.mineral_all_search, name='search-all'),
 ]

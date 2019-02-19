@@ -4,17 +4,6 @@ from django.db import migrations
 from ..models import Mineral
 
 
-def convert_colors(*arg):
-    minerals = Mineral.objects.all()
-    for mineral in minerals:
-        if mineral.color.lower() in ['gray', 'grey']:
-            mineral.color = 'grey'
-            mineral.save()
-        elif mineral.color.lower() == 'colourless':
-            mineral.color = 'colorless'
-            mineral.save()
-
-
 class Migration(migrations.Migration):
 
     initial = True
@@ -26,5 +15,4 @@ class Migration(migrations.Migration):
     operations = [
         # After the database is created, load from the json file
         migrations.RunPython(Mineral.load_from_json),
-        migrations.RunPython(convert_colors)
     ]
