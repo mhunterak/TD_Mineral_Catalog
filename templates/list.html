@@ -20,6 +20,7 @@
 
 
 {% block content %}
+      {% if count %}
       <div class="grid-100">
         <ul class="minerals__container text-centered">
           {% for mineral in minerals %}
@@ -29,5 +30,6 @@
           {% endfor %}
         </ul>
       </div>
+      {% endif %}
     </div>
 {% endblock content%}
