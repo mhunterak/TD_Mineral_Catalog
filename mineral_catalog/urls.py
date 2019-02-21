@@ -21,32 +21,42 @@ from django.conf.urls import include, url
 
 from minerals import views
 
-urlpatterns = [
-    # index
-    path('', views.mineral_list, name='index'),
-    # show all minerals
-    path('all/', views.all_minerals, name='all'),
-    # show mineral details
-    path('detail/<int:pk>', views.mineral_detail, name='detail'),
-    # Show random element
-    path('random/', views.random_mineral, name='random'),
+urlpatterns = [  # DEFAULT VIEWS: (admin)
     # Django admin
     path('admin/', admin.site.urls),
+]
+urlpatterns += [  # LIST VIEWS:
+    # index
+    path('', views.index, name='index'),
+    # show all minerals
+    path('all/', views.all_minerals, name='all'),
+]
+urlpatterns += [  # FILTER VIEWS:
     # filter by first letter
     path('filter_letter/<str:query>',
          views.filter_by_first_letter, name='filter'),
-    # search by name contains
-    # path('search/', views.mineral_name_search, name='search'),
     # filter by group
     path('group/<str:query>', views.filter_by_group, name='group'),
     # filter by color
     path('color/<str:query>', views.filter_by_color, name='color'),
-    # search by any field contains
-    path('search-all/', views.mineral_all_search, name='search-all'),
 ]
-
+urlpatterns += [  # SEARCH VIEWS:
+    # search by name contains
+    #   DEPRECATED - this function has been replaced by search.
+    # path('search/', views.mineral_name_search, name='search'),
+    # search by any field contains
+    path('search/', views.mineral_all_search, name='search'),
+]
+urlpatterns += [  # DETAIL VIEWS:
+    # show mineral details
+    path('detail/<int:pk>', views.mineral_detail, name='detail'),
+    # Show random mineral details
+    path('random/', views.random_mineral, name='random'),
+]
 urlpatterns += staticfiles_urlpatterns()
 
+
+# django-debug-toolbar:
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += [

@@ -1,3 +1,14 @@
+COLORS = [
+    'Black', 
+    'Blue', 
+    'Brown', 
+    'Colorless',
+    'Gray', 
+    'Purple', 
+    'White', 
+    'Yellow', 
+]
+
 GROUPS = [
     'Silicates',
     'Oxides',

@@ -1,5 +1,7 @@
 '''
-MASTER TODO LIST 
+MASTER TODO LIST
+
+NOTE: This task list has been completed.
 
 Allow filtering by the first letter of the mineral name.
     - Add links for each letter of the alphabet.
@@ -25,7 +27,7 @@ Allow filtering by group.
     groups on the left side of the layout template.
     - Clicking a group name,
     displays a list of all of the minerals in the database that are in that
-    group. 
+    group.
     - The group name being displayed should be bolded.
     - In the details view, no group name should be bolded.
 
@@ -43,7 +45,7 @@ Arsenates
 Native Elements
 Other
 
-: Optimize database queries
+Optimize database queries
     Use the django-debug-toolbar to check that queries to the database
     take no longer than 10ms to complete.
 
@@ -59,9 +61,15 @@ Make the templates match the style used in the example files.
 EXTRA CREDIT
 
 Allow full-text search.
-    Instead of only searching the mineral names, the site will search all fields in the database and display the names of the minerals that contain the search text.
+    Instead of only searching the mineral names, the site will search all
+    fields in the database and display the names of the minerals that contain
+    the search text.
 
 Add more ways to filter.
-    Instead of just filtering by first letter and group, add one or more additional filters. These should behave like the group filter. Example filters are color and crystal habit, but you can choose to add filtering for any property you like. Hint: the filters can act like canned search queries.
+    Instead of just filtering by first letter and group, add one or more
+    additional filters. These should behave like the group filter. Example
+    ilters are color and crystal habit, but you can choose to add filtering
+    for any property you like. Hint: the filters can act like canned search
+    queries.
 
 '''

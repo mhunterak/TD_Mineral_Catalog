@@ -77,7 +77,7 @@
                 {% endfor %}
             </p>
 
-            <form action="{% url 'search-all' %}" class="text-centered" method="post" name="search">
+            <form action="{% url 'search' %}" class="text-centered" method="post" name="search">
                 {% csrf_token %}
                 {{ SearchForm.search }}<input type='submit'>
             </form>

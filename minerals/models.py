@@ -35,9 +35,10 @@ data comes from the provided json file'''
 
     @staticmethod
     def load_from_json(*args):
-        '''This function loads minerals into the database from the provided json document.
-I considered moving this function, but I thought it better to have it here than obscured
-in a strange file.
+        '''
+This function loads minerals into the database from the provided json document.
+I considered moving this function, but I thought it better to have it here
+than obscured in a strange file.
 
 This function is now called in .migrations/0001_initial.py
 '''
@@ -91,7 +92,7 @@ into a template-friendly, ordered, and iterable format was a list of lists'''
                     '_state', 'created_at', 'id', 'image_filename',
                     'image_caption']:
                 # if there's a value is not blank,
-                if self.__dict__[key] is not '':
+                if self.__dict__[key] != '':
                     display_key = self.key_w_spaces(key)
                     # save the child list
                     sub_list = [display_key, self.__dict__[key]]
@@ -108,18 +109,21 @@ into a template-friendly, ordered, and iterable format was a list of lists'''
         # return the combined list
         return kv_list + second_list
 
-    def iter():
+    def iter_attr(self):
+        '''
+This function iterates the attribute names
+so they can be searched in views.mineral_all_search()
+        '''
         for key in Mineral.__dict__.keys():
             if not re.match('__', key):
                 if key not in [
                     '_state', 'created_at', 'id', 'image_filename', '_meta',
                     'image_caption', 'DoesNotExist', 'MultipleObjectsReturned',
                     'get_next_by_created_at', 'get_previous_by_created_at',
-                    'load_from_json', 'key_w_spaces', 'kv_list', 'iter',
+                    'load_from_json', 'key_w_spaces', 'kv_list', 'iter_attr',
                     'objects',
-                    ]:
+                        ]:
                     yield key
-
 
     def __str__(self):
         return str(self.kv_list())
