@@ -2,8 +2,6 @@
 
 from django.db import migrations, models
 
-from ..models import Mineral
-
 
 class Migration(migrations.Migration):
 
@@ -16,15 +14,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Mineral',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                )),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('name', models.CharField(max_length=255)),
+                ('name', models.CharField(db_index=True, max_length=255)),
                 ('image_filename', models.CharField(max_length=255)),
                 ('image_caption', models.CharField(max_length=255)),
                 ('category', models.CharField(max_length=255)),
                 ('formula', models.CharField(max_length=255)),
                 ('strunz_classification', models.CharField(max_length=255)),
-                ('color', models.CharField(max_length=255)),
+                ('color', models.CharField(db_index=True, max_length=255)),
                 ('crystal_system', models.CharField(max_length=255)),
                 ('unit_cell', models.CharField(max_length=255)),
                 ('crystal_symmetry', models.CharField(max_length=255)),
@@ -37,6 +40,11 @@ class Migration(migrations.Migration):
                 ('refractive_index', models.CharField(max_length=255)),
                 ('crystal_habit', models.CharField(max_length=255)),
                 ('specific_gravity', models.CharField(max_length=255)),
+                ('group', models.CharField(
+                    db_index=True,
+                    default='',
+                    max_length=255
+                )),
             ],
         ),
     ]
