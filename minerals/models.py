@@ -109,12 +109,13 @@ into a template-friendly, ordered, and iterable format was a list of lists'''
         # return the combined list
         return kv_list + second_list
 
-    def iter_attr(self):
+    @classmethod
+    def iter_attr(cls):
         '''
 This function iterates the attribute names
 so they can be searched in views.mineral_all_search()
         '''
-        for key in Mineral.__dict__.keys():
+        for key in cls.__dict__.keys():
             if not re.match('__', key):
                 if key not in [
                     '_state', 'created_at', 'id', 'image_filename', '_meta',

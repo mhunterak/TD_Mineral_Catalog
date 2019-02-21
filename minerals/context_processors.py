@@ -6,9 +6,10 @@ to templates when they're rendered.
 import string
 import re
 
+from django.utils.datastructures import MultiValueDictKeyError
+
 from .forms import SearchForm
 from .models import Mineral
-
 from .static_vars import COLORS, GROUPS
 
 
@@ -16,8 +17,12 @@ def search_form(request):
     '''
 renders the search form - still needs a <form> wrapper to control action
     '''
+    try:
+        query = request.POST['search']
+    except MultiValueDictKeyError:
+        query = ""
     return {
-        'SearchForm': SearchForm()
+        'SearchForm': SearchForm(initial={'search': query}),
     }
 
 

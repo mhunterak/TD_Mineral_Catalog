@@ -32,6 +32,7 @@ just in case you want to
         'list.html',
         {
             'minerals': minerals,
+            'count': len(minerals),
         },
     )
 
@@ -52,6 +53,7 @@ showing a filtered mineral list by the first letter of the name
         'list.html',
         {
             'minerals': minerals,
+            'count': len(minerals),
             'letter': query.upper(),
         },
     )
@@ -69,6 +71,7 @@ showing a filtered mineral list by the Mineral's group attribute
         'list.html',
         {
             'minerals': minerals,
+            'count': len(minerals),
             'group': query,
         },
     )
@@ -92,6 +95,7 @@ showing a list of minerals with a specific color in the color field.
         'list.html',
         {
             'minerals': minerals,
+            'count': len(minerals),
             'color_listing': query,
         },
     )
@@ -144,13 +148,14 @@ not just the name (see DEPRECATED, prev function)
         else:
             or_query = or_query | q
     # get the query from the combined Q query object
-    minerals = Mineral.objects.filter(or_query)
+    minerals = Mineral.objects.filter(or_query).annotate()
     # render the list template with the queried minerals
     return render(
         request,
         'list.html',
         {
             'minerals': minerals,
+            'count': len(minerals),
             'query': query,
         },
     )
