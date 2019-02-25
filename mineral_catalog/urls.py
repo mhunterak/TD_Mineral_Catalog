@@ -14,47 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 from django.conf import settings
 from django.conf.urls import include, url
+from mineral_catalog import views
 
-from minerals import views
-
-urlpatterns = [  # DEFAULT VIEWS: (admin)
-    # Django admin
-    path('admin/', admin.site.urls),
-]
-urlpatterns += [  # LIST VIEWS:
+urlpatterns = [  # DEFAULT VIEWS
     # index
     path('', views.index, name='index'),
-    # show all minerals
-    path('all/', views.all_minerals, name='all'),
+    # Django admin
+    path('admin/', admin.site.urls),
+    # import minerals
+    path('minerals/', include(
+        ('minerals.urls', 'minerals'), namespace='minerals')),
 ]
-urlpatterns += [  # FILTER VIEWS:
-    # filter by first letter
-    path('filter_letter/<str:query>',
-         views.filter_by_first_letter, name='filter'),
-    # filter by group
-    path('group/<str:query>', views.filter_by_group, name='group'),
-    # filter by color
-    path('color/<str:query>', views.filter_by_color, name='color'),
-]
-urlpatterns += [  # SEARCH VIEWS:
-    # search by name contains
-    #   DEPRECATED - this function has been replaced by search.
-    # path('search/', views.mineral_name_search, name='search'),
-    # search by any field contains
-    path('search/', views.mineral_all_search, name='search'),
-]
-urlpatterns += [  # DETAIL VIEWS:
-    # show mineral details
-    path('detail/<int:pk>', views.mineral_detail, name='detail'),
-    # Show random mineral details
-    path('random/', views.random_mineral, name='random'),
-]
-urlpatterns += staticfiles_urlpatterns()
-
 
 # django-debug-toolbar:
 if settings.DEBUG:

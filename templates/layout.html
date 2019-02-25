@@ -26,7 +26,7 @@
     <div class="container">
         <div class="topbar fixed">
             <div class="grid-100 text-centered" id="searchSidebar">
-                <form action="{% url 'search' %}" class=" grid-100 text-centered" method="post" name="search">
+                <form action="{% url 'minerals:search' %}" class=" grid-100 text-centered" method="post" name="search">
                     {% csrf_token %}
                     {{ SearchForm.search }}
                     <input id="searchButton" class="mineral__table text-centered" type='submit' value="SUBMIT">
@@ -38,7 +38,7 @@
                     <div class="filterList">
                         Colors:<br />
                         {% for color in colors %}
-                        <a href="{% url 'color' query=color %}" {% if color == color_listing %} id='filtered_color'
+                        <a href="{% url 'minerals:color' query=color %}" {% if color == color_listing %} id='filtered_color'
                             {% endif %}>
 
                             {{ color | title }}
@@ -51,7 +51,7 @@
                     <div class="filterList">
                         Groups: <br />
                         {% for group_listing in groups %}
-                        <a href="{% url 'group' query=group_listing %}" {% if group == group_listing %}
+                        <a href="{% url 'minerals:group' query=group_listing %}" {% if group == group_listing %}
                             id='filtered_group' {% endif %}>
 
                             {{ group_listing }}
@@ -66,7 +66,7 @@
                         {% if char == letter %}
                         <strong>
                             {% endif %}
-                            <a href="{% url 'filter' query=char %}" {% if char == letter %} id='filtered_letter'
+                            <a href="{% url 'minerals:filter' query=char %}" {% if char == letter %} id='filtered_letter'
                                 {% endif %}>
                                 {{ char }}
                             </a>
@@ -99,7 +99,7 @@
                 {% if char == letter %}
                 <strong>
                     {% endif %}
-                    <a href="{% url 'filter' query=char %}" {% if char == letter %} id='filtered_letter' {% endif %}>
+                    <a href="{% url 'minerals:filter' query=char %}" {% if char == letter %} id='filtered_letter' {% endif %}>
                         {{ char }}
                     </a>
                     {% if char == letter %}
@@ -134,7 +134,7 @@
 
         </div>
         <div class="minerals__random">
-            <a class="minerals__anchor" href="{% url 'random' %}">Show random mineral</a>
+            <a class="minerals__anchor" href="{% url 'minerals:random' %}">Show random mineral</a>
         </div>
 </body>
 </html>
