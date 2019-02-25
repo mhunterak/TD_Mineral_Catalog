@@ -208,16 +208,12 @@ table, p, ul { margin-bottom: 2.5rem; }
 .mineral__category { font-weight: bold; width: 40%; }
 .mineral__formula { font-size: 12px; }
 
-.topbar { width: 100%; }
 #leftSidebar { display: inline;}
 .filterList {display: none;}
 #leftSidebar:hover .filterList {display: inline;}
 
-.fixed { background-color: #384033; box-shadow: 0 0 100px 50px #CAE5D2; color: #fff; padding: 20px; position: fixed; z-index: 1;}
+.topbar { width: 100%; background-color: #384033; box-shadow: 0 0 100px 50px #CAE5D2; color: #fff; padding: 20px; position: absolute; z-index: 1;}
 .nopadding { padding: 0; }
 
-#maincontent { 
-  padding-bottom: 65px;
-  padding-top: 115px;
-}
+#maincontent { padding-bottom: 65px; padding-top: 115px;}
 #searchButton { margin-left: -85px; }

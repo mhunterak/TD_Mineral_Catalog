@@ -2,7 +2,7 @@ import random
 
 from django.contrib import messages
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 
 from minerals.models import Mineral
 
@@ -172,7 +172,7 @@ selecting a random mineral
     # generate random number between 1 and the number of minerals we have
     random_id = random.randint(1, Mineral.objects.count())
     # return a redirect the detail page for that mineral
-    return redirect('/detail/{}'.format(random_id))
+    return redirect('minerals:detail', pk=random_id)
 
 
 def mineral_detail(request, pk):

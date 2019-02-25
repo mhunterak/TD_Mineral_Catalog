@@ -6,35 +6,36 @@
   <div class="grid-100">
     <a href="/">
       <svg class="logo" viewBox="0 0 127.6 84.8" preserveAspectRation="xMinYMin meet">
-        <polygon points="42.7,84.8 49.6,79.4 40,62.5 51.2,43.5 51.2,43.5 25,0 0,55.6 "/>
-        <polygon class="logo--middle" points="52.9,79.5 52.9,79.5 84.8,80.1 59.7,35 43.3,62.4 "/>
-        <polygon points="127.6,61.4 127.6,61.4 110.3,13.5 110.3,13.5 70.3,48.1 70.3,48.1 88.3,80.5 95.3,81.4 95.3,81.4 "/>
+        <polygon points="42.7,84.8 49.6,79.4 40,62.5 51.2,43.5 51.2,43.5 25,0 0,55.6 " />
+        <polygon class="logo--middle" points="52.9,79.5 52.9,79.5 84.8,80.1 59.7,35 43.3,62.4 " />
+        <polygon
+          points="127.6,61.4 127.6,61.4 110.3,13.5 110.3,13.5 70.3,48.1 70.3,48.1 88.3,80.5 95.3,81.4 95.3,81.4 " />
       </svg>
       <h1 class="logo__name text-centered">Maxwell's Minerals</h1>
     </a>
     <p class="logo__text text-centered">This mineral rocks!</p>
   </div>
 {% endblock head %}
-{% block content %}
-    <div class="grid-100 mineral__container">
-      <h1 class="mineral__name">{{ mineral.name }}</h1>
-      <div class="mineral__image-bg">
-        <img class="mineral__image" src="/static/images/{{ mineral.name }}.jpg">
-        <p class="mineral__caption">{{ mineral.image_caption }}</p>
-      </div>
-      <div class="mineral__table-container">
-        <table class="mineral__table">
-          {% for kv in kv_list %}
-          <tr>
-            <td class="mineral__title">{{ kv.0 | title | under_space }}</td>
-            <td class="mineral__category">{{ kv.1 | safe }}</td>
-          </tr>
-          {% endfor %}
-        </table>
-      </div>
+  {% block content %}
+  <div class="grid-100 mineral__container">
+    <h1 class="mineral__name">{{ mineral.name }}</h1>
+    <div class="mineral__image-bg">
+      <img class="mineral__image" src="/static/images/{{ mineral.name }}.jpg">
+      <p class="mineral__caption">{{ mineral.image_caption }}</p>
+    </div>
+    <div class="mineral__table-container">
+      <table class="mineral__table">
+        {% for kv in kv_list %}
+        <tr>
+          <td class="mineral__title">{{ kv.0 | title | under_space }}</td>
+          <td class="mineral__category">{{ kv.1 | safe }}</td>
+        </tr>
+        {% endfor %}
+      </table>
     </div>
   </div>
-  <div class="minerals__random">
-    <a class="minerals__anchor" href="#">Show random mineral</a>
-  </div>
-{% endblock content %}
+</div>
+<div class="minerals__random">
+  <a class="minerals__anchor" href="#">Show random mineral</a>
+</div>
+  {% endblock content %}
